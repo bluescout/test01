@@ -1,6 +1,6 @@
 # test01
 
-The repository contains simple agent code, no central node or frontend yet. As for now, I've spent about 5h gross, including env setup.
+The repository contains simple agent code, with no tests, no central node or frontend yet. As for now, I've spent about 5h gross, including env setup.
 
 I've decided to push metrics from agents to the central node as agent nodes may be not accessible from central node by HTTP, and also this makes the agent simpler and smaller, as no servlet container needed.
 
