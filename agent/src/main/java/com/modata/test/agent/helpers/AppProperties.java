@@ -1,12 +1,12 @@
 package com.modata.test.agent.helpers;
 
 import com.modata.test.agent.Application;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Properties;
 
-import static java.lang.String.format;
-
+@Slf4j
 public class AppProperties {
     private static final String PROPERTIES_FILE_NAME = "config.properties";
     private static Properties PROPERTIES = new Properties() {{
@@ -19,7 +19,7 @@ public class AppProperties {
         try {
             PROPERTIES.load(Application.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
         } catch (IOException e) {
-            throw new RuntimeException(format("FATAL ERROR: Failed to read application PROPERTIES from '%s'.", PROPERTIES_FILE_NAME), e);
+            log.warn("Failed to read application properties from [{}], using defaults.", PROPERTIES_FILE_NAME);
         }
     }
 
