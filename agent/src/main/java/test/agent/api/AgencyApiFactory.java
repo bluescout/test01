@@ -1,21 +1,22 @@
-package com.modata.test.agent.helpers;
+package test.agent.api;
 
-import com.modata.test.agent.agency.AgencyApi;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import test.agent.helpers.AppProperties;
+import test.api.AgencyApi;
 
 public class AgencyApiFactory {
+
+    public static AgencyApi getAgencyApi() {
+        return LazyHolder.api;
+    }
 
     private static class LazyHolder {
         static final AgencyApi api = Feign.builder()
                 .decoder(new JacksonDecoder())
                 .encoder(new JacksonEncoder())
-                .target(AgencyApi.class, AppProperties.getAgencyUrl());
-    }
-
-    public static AgencyApi getAgencyApi() {
-        return LazyHolder.api;
+                .target(FeignAgencyApi.class, AppProperties.getAgencyUrl());
     }
 
 }

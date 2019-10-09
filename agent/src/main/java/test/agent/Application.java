@@ -1,14 +1,17 @@
-package com.modata.test.agent;
+package test.agent;
 
-import com.modata.test.agent.agency.*;
-import com.modata.test.agent.helpers.AgencyApiFactory;
-import com.modata.test.agent.helpers.Hostname;
-import com.modata.test.agent.helpers.AppProperties;
-import com.modata.test.agent.metrics.MetricsCollector;
-import com.modata.test.agent.metrics.UnixMetricsCollector;
-import com.modata.test.agent.metrics.WindowsMetricsCollector;
 import com.sun.jna.Platform;
 import lombok.extern.slf4j.Slf4j;
+import test.agent.api.AgencyApiFactory;
+import test.agent.helpers.AppProperties;
+import test.agent.helpers.Hostname;
+import test.agent.metrics.MetricsCollector;
+import test.agent.metrics.UnixMetricsCollector;
+import test.agent.metrics.WindowsMetricsCollector;
+import test.api.AgencyApi;
+import test.api.MetricsDto;
+import test.api.SettingsDto;
+import test.api.TaskDto;
 
 import java.util.List;
 
@@ -47,8 +50,6 @@ public class Application {
             }
             Thread.sleep(interval);
         }
-
-
     }
 
 }

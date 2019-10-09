@@ -1,4 +1,4 @@
-package com.modata.test.agent.helpers;
+package test.agent.helpers;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -10,12 +10,6 @@ import com.sun.jna.platform.win32.Kernel32Util;
  * Copyright (c) 2017 Matt Sheppard
  */
 public class Hostname {
-    private interface UnixCLibrary extends Library {
-        UnixCLibrary INSTANCE = (UnixCLibrary) Native.load("c", UnixCLibrary.class);
-
-        int gethostname(byte[] hostname, int bufferSize);
-    }
-
     /**
      * @return the hostname the of the current machine
      */
@@ -37,5 +31,11 @@ public class Hostname {
 
             return Native.toString(hostnameBuffer);
         }
+    }
+
+    private interface UnixCLibrary extends Library {
+        UnixCLibrary INSTANCE = (UnixCLibrary) Native.load("c", UnixCLibrary.class);
+
+        int gethostname(byte[] hostname, int bufferSize);
     }
 }

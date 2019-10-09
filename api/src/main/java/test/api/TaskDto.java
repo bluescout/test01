@@ -1,4 +1,4 @@
-package com.modata.test.agent.agency;
+package test.api;
 
 import lombok.Builder;
 import lombok.Data;

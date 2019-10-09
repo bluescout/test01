@@ -1,7 +1,7 @@
-package com.modata.test.agent.helpers;
+package test.agent.helpers;
 
-import com.modata.test.agent.Application;
 import lombok.extern.slf4j.Slf4j;
+import test.agent.Application;
 
 import java.io.IOException;
 import java.util.Properties;

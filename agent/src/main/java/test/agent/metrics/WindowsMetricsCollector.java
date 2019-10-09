@@ -1,7 +1,7 @@
-package com.modata.test.agent.metrics;
+package test.agent.metrics;
 
-import com.modata.test.agent.agency.TaskDto;
 import lombok.extern.slf4j.Slf4j;
+import test.api.TaskDto;
 
 import java.io.BufferedReader;
 import java.io.IOException;

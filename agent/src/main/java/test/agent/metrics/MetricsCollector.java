@@ -1,6 +1,6 @@
-package com.modata.test.agent.metrics;
+package test.agent.metrics;
 
-import com.modata.test.agent.agency.TaskDto;
+import test.api.TaskDto;
 
 import java.util.List;
 
