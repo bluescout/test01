@@ -1,0 +1,7 @@
+"Image Name","PID","Session Name","Session#","Mem Usage","Status","User Name","CPU Time","Window Title"
+"System Idle Process","0","Services","0","8 K","Unknown","NT AUTHORITY\SYSTEM","150:01:45","N/A"
+"System","4","Services","0","604 K","Unknown","N/A","1:00:14","N/A"
+"Registry","96","Services","0","49,552 K","Unknown","N/A","0:00:02","N/A"
+"smss.exe","384","Services","0","400 K","Unknown","N/A","0:00:00","N/A"
+"csrss.exe","524","Services","0","1,760 K","Unknown","N/A","0:00:04","N/A"
+"tasklist.exe","15320","Console","1","9,404 K","Unknown","DESKTOP-6LK186N\bluescout","0:00:01","N/A"

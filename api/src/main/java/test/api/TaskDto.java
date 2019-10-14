@@ -7,10 +7,11 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
+@EqualsAndHashCode
 public class TaskDto {
     private int pid;
     private String name;
-    private double cpu;
-    private long memory;
-    private long diskIo;
+    private String cpuTime;
+    private Long memory;
+    private Long diskIo;
 }
