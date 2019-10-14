@@ -15,8 +15,7 @@ import test.api.SettingsDto;
 public interface FeignAgencyApi extends AgencyApi {
 
     // TODO: add authentication
-    // TODO: think of computerId collisions
-    @RequestLine("PUT /v1/metrics/{computerId}")
+    @RequestLine("PUT /agent-api/v1/computers/{computerId}/metrics")
     SettingsDto putMetrics(@Param("computerId") String computerId, MetricsDto metrics);
 
 }

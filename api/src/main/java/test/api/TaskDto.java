@@ -1,10 +1,12 @@
 package test.api;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@ToString
 public class TaskDto {
     private int pid;
     private String name;

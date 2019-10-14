@@ -1,7 +1,7 @@
 package test.agent.helpers;
 
 import lombok.extern.slf4j.Slf4j;
-import test.agent.Application;
+import test.agent.AgentApplication;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -17,7 +17,7 @@ public class AppProperties {
 
     static {
         try {
-            PROPERTIES.load(Application.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
+            PROPERTIES.load(AgentApplication.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
         } catch (IOException e) {
             log.warn("Failed to read application properties from [{}], using defaults.", PROPERTIES_FILE_NAME);
         }

@@ -1,6 +1,7 @@
 package test.agent.api;
 
 import feign.Feign;
+import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import test.agent.helpers.AppProperties;
@@ -16,6 +17,8 @@ public class AgencyApiFactory {
         static final AgencyApi api = Feign.builder()
                 .decoder(new JacksonDecoder())
                 .encoder(new JacksonEncoder())
+                .logger(new CustomFeignLogger())
+                .logLevel(Logger.Level.FULL)
                 .target(FeignAgencyApi.class, AppProperties.getAgencyUrl());
     }
 

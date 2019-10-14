@@ -13,12 +13,13 @@ import test.api.MetricsDto;
 import test.api.SettingsDto;
 import test.api.TaskDto;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
 
 @Slf4j
-public class Application {
+public class AgentApplication {
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -39,7 +40,7 @@ public class Application {
             try {
                 newSettings = agencyApi.putMetrics(
                         hostname,
-                        new MetricsDto(tasks, new SettingsDto(interval))
+                        new MetricsDto(new Date(), tasks, new SettingsDto(interval))
                 );
             } catch (Exception e) {
                 log.warn("Failed to send metrics to Agency: {}", e.getMessage());

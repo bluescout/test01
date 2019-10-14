@@ -1,10 +1,11 @@
 package test.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class SettingsDto {
     private Integer interval;
 }
