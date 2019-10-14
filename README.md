@@ -14,3 +14,11 @@ To keep the agent executable jar small, and as it is very simple, I did not use 
 
 ## 2019-10-09
 30m: Introduce modular structure, extract API to a new module
+
+## 2019-10-14
+4h:
+ * Improve project structure
+ * Implement simple single-node "central node" API and and API for UI. 
+ * Describe multi-node scalable solution in comments.
+ * Add logging of requests to both Agent and Agency 
+
