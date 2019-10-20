@@ -9,6 +9,7 @@ import test.api.MetricsDto;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin
 @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UiController {
     private final MetricsService metricsService;
@@ -19,17 +20,17 @@ public class UiController {
     }
 
     @RequestMapping(value = UiApi.V1.COMPUTERS, method = RequestMethod.GET)
-    public Collection<String> getComputers(@PathVariable("computerId") String computerId, @RequestBody MetricsDto metrics) {
+    public Collection<String> getComputers() {
         return metricsService.getComputers();
     }
 
     @RequestMapping(value = UiApi.V1.METRICS, method = RequestMethod.GET)
-    public MetricsDto getCurrentMetrics(@PathVariable("computerId") String computerId, @RequestBody MetricsDto metrics) {
+    public MetricsDto getCurrentMetrics(@PathVariable("computerId") String computerId) {
         return metricsService.getCurrentMetrics(computerId);
     }
 
     @RequestMapping(value = UiApi.V1.METRICS_HISTORY, method = RequestMethod.GET)
-    public Collection<MetricsDto> getHistoricalMetrics(@PathVariable("computerId") String computerId, @RequestBody MetricsDto metrics) {
+    public Collection<MetricsDto> getHistoricalMetrics(@PathVariable("computerId") String computerId) {
         return metricsService.getHistoricalMetrics(computerId);
     }
 
