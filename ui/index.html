@@ -21,6 +21,8 @@
                 var container = $('#data');
                 container.empty();
 
+                container.append($('<h4>' + computerId + ' Tasks</h4><p>Timestamp: ' + data.timestamp + '</p>'));
+
                 if (data.tasks && data.tasks.length) {
                     var header = '<tr><th>PID</th><th>Name</th><th>CPU time</th><th>Memory</th><th>Disk IO</th></tr>';
                     var tasks = data.tasks.map(function (task) {
@@ -29,7 +31,8 @@
                     });
                     var list = $('<table />').html(header + tasks.join(''));
                     container.append(list);
-                };
+                }
+                ;
             });
         };
 
@@ -62,6 +65,7 @@
             margin: 0;
             padding: 2px 5px;
         }
+
         #data table {
             border-spacing: 0;
             border-collapse: collapse;
@@ -75,7 +79,6 @@
 <h3>Computers</h3>
 <div id="computers"></div>
 
-<h4>Data</h4>
 <div id="data"></div>
 
 </body>
