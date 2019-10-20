@@ -7,17 +7,37 @@
     <script type="text/javascript" src="jquery-3.4.1.js"></script>
 
     <script type="text/javascript">
+        var config = {
+            baseUrl: 'http://localhost:8081/ui-api/v1',
+            tasksRefreshInterval: 10000
+        };
+
+        var api = {
+            computers: config.baseUrl + '/computers'
+        };
+
         $.ajaxSetup({
             headers: {
                 'Content-Type': 'application/json'
             }
         });
 
-        var fetchData = function (computerId) {
-            console.log(computerId);
-            $.getJSON('http://localhost:8081/ui-api/v1/computers/' + computerId, function (data) {
-                console.log(data);
+        var interval;
 
+        var showTasks = function (computerId) {
+            if (interval) {
+                clearInterval(interval);
+            }
+            if (config.tasksRefreshInterval) {
+                interval = setInterval(function () {
+                    fetchTasks(computerId);
+                }, config.tasksRefreshInterval);
+            }
+            fetchTasks(computerId);
+        };
+
+        var fetchTasks = function (computerId) {
+            $.getJSON(api.computers + '/' + computerId, function (data) {
                 var container = $('#data');
                 container.empty();
 
@@ -29,25 +49,22 @@
                         return '<tr><td>' + task.pid + '</td><td>' + task.name + '</td><td>' + task.cpuTime + '</td>' +
                             '<td>' + task.memory + '</td><td>' + task.diskIo + '</td></tr>';
                     });
-                    var list = $('<table />').html(header + tasks.join(''));
+                    var list = $('<table />').html(header + tasks.join());
                     container.append(list);
                 }
-                ;
             });
         };
 
         var fetchComputers = function () {
-            $.getJSON('http://localhost:8081/ui-api/v1/computers', function (data) {
-                console.log(data);
-
+            $.getJSON(api.computers, function (data) {
                 var container = $('#computers');
                 container.empty();
 
                 if (data.length) {
-                    var items = data.map(function (item) {
-                        return '<li><a href="javascript:fetchData(\'' + item + '\')">' + item + '</a></li>';
+                    var computers = data.map(function (computer) {
+                        return '<li><a href="javascript:showTasks(\'' + computer + '\')">' + computer + '</a></li>';
                     });
-                    var list = $('<ul />').html(items.join(''));
+                    var list = $('<ul />').html(computers.join());
                     container.append(list);
                 }
             });
