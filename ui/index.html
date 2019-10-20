@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test App</title>
+
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        var fetchData = function (computerId) {
+            console.log(computerId);
+            $.getJSON('http://localhost:8081/ui-api/v1/computers/' + computerId, function (data) {
+                console.log(data);
+
+                var container = $('#data');
+                container.empty();
+
+                if (data.tasks && data.tasks.length) {
+                    var header = '<tr><th>PID</th><th>Name</th><th>CPU time</th><th>Memory</th><th>Disk IO</th></tr>';
+                    var tasks = data.tasks.map(function (task) {
+                        return '<tr><td>' + task.pid + '</td><td>' + task.name + '</td><td>' + task.cpuTime + '</td>' +
+                            '<td>' + task.memory + '</td><td>' + task.diskIo + '</td></tr>';
+                    });
+                    var list = $('<table />').html(header + tasks.join(''));
+                    container.append(list);
+                };
+            });
+        };
+
+        var fetchComputers = function () {
+            $.getJSON('http://localhost:8081/ui-api/v1/computers', function (data) {
+                console.log(data);
+
+                var container = $('#computers');
+                container.empty();
+
+                if (data.length) {
+                    var items = data.map(function (item) {
+                        return '<li><a href="javascript:fetchData(\'' + item + '\')">' + item + '</a></li>';
+                    });
+                    var list = $('<ul />').html(items.join(''));
+                    container.append(list);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            fetchComputers();
+            // setInterval(fetchComputers, 5000);
+        });
+    </script>
+
+    <style type="text/css">
+        #data td, th {
+            border: 1px solid gray;
+            margin: 0;
+            padding: 2px 5px;
+        }
+        #data table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test App</h1>
+
+<h3>Computers</h3>
+<div id="computers"></div>
+
+<h4>Data</h4>
+<div id="data"></div>
+
+</body>
+</html>
