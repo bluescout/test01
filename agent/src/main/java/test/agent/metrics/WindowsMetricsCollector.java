@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Deprecated
+/**
+ * Deprecated, use JProcessesMetricsCollector instead
+ * */
 public class WindowsMetricsCollector implements MetricsCollector {
 
     static final String OS_COMMAND = "tasklist /FO CSV /V";
@@ -17,7 +21,7 @@ public class WindowsMetricsCollector implements MetricsCollector {
 
     @Override
     public List<TaskDto> getTasks() {
-        // TODO: use Java 9's ProcessHandle
+        // Tried to use Java 9's ProcessHandle, and it does not provide memory info
         try {
 
             return WindowsMetricsParser.parse(execTaskList());

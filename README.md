@@ -24,3 +24,11 @@ To keep the agent executable jar small, and as it is very simple, I did not use 
  * Cover metrics parsing with unit test
  * Improve metrics collection for Windows
 
+## 2019-10-20
+2h:
+ * Started React UI with create-react-app-redux, abandoned it as it is too complicated for the task 
+ * Implemented simple jquery-based UI
+ 
+1h 30m:
+ * Tried to use Java 9's ProcessHandle, and it does not provide memory info
+ * Used JProcesses for cross-platform metrics collecting

@@ -23,8 +23,8 @@ final class WindowsMetricsParser {
                 String[] columns = line.split("(^\"|\",\"|\"$)");
                 tasks.add(TaskDto.builder()
                         .name(columns[1])
-                        .pid(Integer.parseInt(columns[2]))
-                        .memory(Long.parseLong(columns[5].replaceAll("[,. K]", "")) * K)
+                        .pid(columns[2])
+                        .memory(Long.toString(Long.parseLong(columns[5].replaceAll("[,. K]", "")) * K))
                         .cpuTime(columns[8])
                         .build()
                 );

@@ -20,9 +20,8 @@ public class WindowsMetricsParserTest {
     public void should_parse_sample_data() {
         TaskDto task = TaskDto.builder()
                 .name("tasklist.exe")
-                .pid(15320)
-                .memory(9404L * 1024)
-                // TODO: get and parse CPU load
+                .pid("15320")
+                .memory(Integer.toString(9404*1024))
                 .cpuTime("0:00:01")
                 .build();
 

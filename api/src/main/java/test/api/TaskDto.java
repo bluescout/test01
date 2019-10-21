@@ -9,9 +9,9 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class TaskDto {
-    private int pid;
+    private String pid;
     private String name;
     private String cpuTime;
-    private Long memory;
-    private Long diskIo;
+    private String memory;
+    private String diskIo;
 }

@@ -14,10 +14,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class MetricsService {
 
-    // This is a simple single-node implementation of in-memory data storage
     // TODO: for horizontal scalability, use Redis or other messaging (ActiveMQ) and key/value storage (Couchbase)
     // TODO: consider serverless solution such as AWS Lambda, at least for controllers
+
+    // This is a simple single-node implementation of in-memory data storage
     private final Map<String, MetricsDto> currentMetrics = new ConcurrentHashMap<>();
+    // Historical metrics are not used by UI yet, however could be used for graphs
     private final Map<String, Queue<MetricsDto>> historicalMetrics = new ConcurrentHashMap<>();
 
     // TODO: either persist to DB using these queues or remove this and persist Redis

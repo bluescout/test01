@@ -15,6 +15,9 @@
     <packaging>jar</packaging>
 
     <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
         <jna.version>5.3.1</jna.version>
         <feign.version>8.18.0</feign.version>
     </properties>
@@ -23,6 +26,12 @@
         <dependency>
             <groupId>test-task-metrics</groupId>
             <artifactId>api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jprocesses</groupId>
+            <artifactId>jProcesses</artifactId>
+            <version>1.6.4</version>
         </dependency>
 
         <dependency>
