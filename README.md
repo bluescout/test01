@@ -33,3 +33,9 @@ To keep the agent executable jar small, and as it is very simple, I did not use 
  * Tried to use Java 9's ProcessHandle, and it does not provide memory info
  * Used JProcesses for cross-platform metrics collecting
  * Improve code readability
+ 
+ ## 2019-10-21
+ 
+1h:
+ * Implement basic auth for agent-api
+ 
