@@ -9,7 +9,10 @@ import com.sun.jna.platform.win32.Kernel32Util;
  * MIT License
  * Copyright (c) 2017 Matt Sheppard
  */
-public class Hostname {
+public final class Hostname {
+    private Hostname() {
+    }
+
     /**
      * @return the hostname the of the current machine
      */

@@ -7,7 +7,15 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Slf4j
-public class AppProperties {
+public final class AppProperties {
+    static {
+        try {
+            PROPERTIES.load(AgentApplication.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
+        } catch (IOException | NullPointerException e) {
+            log.warn("Failed to read application properties from [{}], using defaults.", PROPERTIES_FILE_NAME);
+        }
+    }
+
     private static final String PROPERTIES_FILE_NAME = "config.properties";
     private static Properties PROPERTIES = new Properties() {{
         defaults = new Properties();
@@ -15,12 +23,7 @@ public class AppProperties {
         defaults.put(Names.PUSH_INTERVAL, "60000");
     }};
 
-    static {
-        try {
-            PROPERTIES.load(AgentApplication.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
-        } catch (IOException e) {
-            log.warn("Failed to read application properties from [{}], using defaults.", PROPERTIES_FILE_NAME);
-        }
+    private AppProperties() {
     }
 
     public static String getAgencyUrl() {

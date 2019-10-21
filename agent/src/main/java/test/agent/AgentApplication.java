@@ -1,14 +1,11 @@
 package test.agent;
 
-import com.sun.jna.Platform;
 import lombok.extern.slf4j.Slf4j;
 import test.agent.api.AgencyApiFactory;
 import test.agent.helpers.AppProperties;
 import test.agent.helpers.Hostname;
 import test.agent.metrics.JProcessesMetricsCollector;
 import test.agent.metrics.MetricsCollector;
-import test.agent.metrics.UnixMetricsCollector;
-import test.agent.metrics.WindowsMetricsCollector;
 import test.api.AgencyApi;
 import test.api.MetricsDto;
 import test.api.SettingsDto;
@@ -19,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
+import static test.agent.helpers.MappingHelper.parseLongSilently;
 
 @Slf4j
 public class AgentApplication {
@@ -30,7 +28,7 @@ public class AgentApplication {
         final AgencyApi agencyApi = AgencyApiFactory.getAgencyApi();
 
 /*
-        // This was my first implementation before I've stumbled upon JProcessesMetricsCollector
+        // This was my first implementation before I've found JProcessesMetricsCollector
         MetricsCollector collector = Platform.isWindows() ?
                 new WindowsMetricsCollector() : new UnixMetricsCollector();
 */
@@ -40,8 +38,7 @@ public class AgentApplication {
         Integer interval = AppProperties.getInterval();
         for (; ; ) {
             List<TaskDto> tasks = collector.getTasks();
-            Comparator<TaskDto> taskComparator = Comparator.comparingInt(task -> Integer.parseInt(task.getMemory()));
-            tasks.sort(taskComparator.reversed());
+            sortTasks(tasks);
 
             SettingsDto newSettings = null;
             try {
@@ -58,6 +55,11 @@ public class AgentApplication {
             }
             Thread.sleep(interval);
         }
+    }
+
+    private static void sortTasks(List<TaskDto> tasks) {
+        Comparator<TaskDto> taskComparator = Comparator.comparingLong(task -> parseLongSilently(task.getMemory(), "memory"));
+        tasks.sort(taskComparator.reversed());
     }
 
 }
