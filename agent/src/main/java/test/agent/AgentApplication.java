@@ -24,8 +24,9 @@ public class AgentApplication {
     public static void main(String[] args) throws InterruptedException {
 
         final String hostname = Hostname.getHostname();
-
         final AgencyApi agencyApi = AgencyApiFactory.getAgencyApi();
+
+        int interval = AppProperties.getInterval();
 
 /*
         // This was my first implementation before I've found JProcessesMetricsCollector
@@ -35,26 +36,30 @@ public class AgentApplication {
         MetricsCollector collector = new JProcessesMetricsCollector();
 
         // TODO: implement cron or other precise control approach
-        Integer interval = AppProperties.getInterval();
         for (; ; ) {
             List<TaskDto> tasks = collector.getTasks();
             sortTasks(tasks);
-
-            SettingsDto newSettings = null;
-            try {
-                newSettings = agencyApi.putMetrics(
-                        hostname,
-                        new MetricsDto(new Date(), tasks, new SettingsDto(interval))
-                );
-            } catch (Exception e) {
-                log.warn("Failed to send metrics to Agency: {}", e.getMessage());
-            }
-
-            if (nonNull(newSettings) && nonNull(newSettings.getInterval())) {
-                interval = newSettings.getInterval();
-            }
+            interval = sendTasks(hostname, agencyApi, tasks, interval);
             Thread.sleep(interval);
         }
+    }
+
+    private static int sendTasks(String hostname, AgencyApi agencyApi, List<TaskDto> tasks, int interval) {
+        SettingsDto newSettings = null;
+        try {
+            newSettings = agencyApi.putMetrics(
+                    hostname,
+                    new MetricsDto(new Date(), tasks, new SettingsDto(interval))
+            );
+        } catch (Exception e) {
+            log.warn("Failed to send metrics to Agency: {}", e.getMessage());
+        }
+
+        int newInterval = interval;
+        if (nonNull(newSettings) && nonNull(newSettings.getInterval())) {
+            newInterval = newSettings.getInterval();
+        }
+        return newInterval;
     }
 
     private static void sortTasks(List<TaskDto> tasks) {
