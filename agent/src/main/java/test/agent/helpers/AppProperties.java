@@ -8,6 +8,12 @@ import java.util.Properties;
 
 @Slf4j
 public final class AppProperties {
+    private static final String PROPERTIES_FILE_NAME = "config.properties";
+    private static Properties PROPERTIES = new Properties() {{
+        defaults = new Properties();
+        defaults.put(Names.AGENCY_URL, "http://localhost:8080");
+        defaults.put(Names.PUSH_INTERVAL, "60000");
+    }};
     static {
         try {
             PROPERTIES.load(AgentApplication.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME));
@@ -15,13 +21,6 @@ public final class AppProperties {
             log.warn("Failed to read application properties from [{}], using defaults.", PROPERTIES_FILE_NAME);
         }
     }
-
-    private static final String PROPERTIES_FILE_NAME = "config.properties";
-    private static Properties PROPERTIES = new Properties() {{
-        defaults = new Properties();
-        defaults.put(Names.AGENCY_URL, "http://localhost:8080");
-        defaults.put(Names.PUSH_INTERVAL, "60000");
-    }};
 
     private AppProperties() {
     }
