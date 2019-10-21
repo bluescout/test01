@@ -33,7 +33,17 @@ public final class AppProperties {
         return Integer.parseInt(PROPERTIES.getProperty(Names.PUSH_INTERVAL));
     }
 
+    public static String getUsername() {
+        return PROPERTIES.getProperty(Names.USERNAME);
+    }
+
+    public static String getKey() {
+        return PROPERTIES.getProperty(Names.KEY);
+    }
+
     private static class Names {
+        static final String USERNAME = "auth.username";
+        static final String KEY = "auth.key";
         static final String AGENCY_URL = "agency.url";
         static final String PUSH_INTERVAL = "push.interval";
     }
