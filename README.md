@@ -29,6 +29,7 @@ To keep the agent executable jar small, and as it is very simple, I did not use 
  * Started React UI with create-react-app-redux, abandoned it as it is too complicated for the task 
  * Implemented simple jquery-based UI
  
-1h 30m:
+2h:
  * Tried to use Java 9's ProcessHandle, and it does not provide memory info
  * Used JProcesses for cross-platform metrics collecting
+ * Improve code readability
